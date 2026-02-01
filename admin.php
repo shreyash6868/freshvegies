@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($stmt->execute()) {
                 $success = "User deleted successfully.";
             } else {
-                $errors[] = "Failed to delete user.";
+                $errors[] = "Fail to delete user.";
             }
             $stmt->close();
         }
