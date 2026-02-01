@@ -194,7 +194,7 @@ $conn->close();
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="4">Total</th>
+                            <th colspan="4">total</th>
                             <th>$<?php echo number_format($total, 2); ?></th>
                             <th></th>
                         </tr>
