@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2026 at 07:06 AM
+-- Generation Time: Feb 13, 2026 at 08:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `farmer_id`, `name`, `description`, `price`, `quantity`, `image`) VALUES
 (1, 2, 'onion', 'Dry onion , Red onion', 35.00, 99, 'uploads/product_697f2be8717830.23204052.jpg'),
-(2, 4, 'tomato', 'red , ready to use', 20.00, 10, 'uploads/product_697f3e340fd970.07126461.jpg'),
+(2, 4, 'tomato', 'red , ready to use', 20.00, 20, 'uploads/product_697f3e340fd970.07126461.jpg'),
 (3, 4, 'onion', 'red onion , dry onion , dehydrated onion', 40.00, 50, 'uploads/product_69803714098d40.58317220.jpg');
 
 -- --------------------------------------------------------
@@ -82,18 +82,20 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `role` enum('farmer','buyer','admin') DEFAULT 'buyer',
   `phone` varchar(20) DEFAULT NULL,
-  `location` varchar(255) DEFAULT NULL
+  `location` varchar(255) DEFAULT NULL,
+  `tasil` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `role`, `phone`, `location`) VALUES
-(1, 'shreyash kagale', '$2y$10$7WnL5itZYdK.NjfkgcngaezunsIZta7vseaAnvU13ZxNYDwLo6nA6', 'admin', '9021506657', 'kavatheguland'),
-(2, 'shivraj nimblakar', '$2y$10$8gLXTswNElc8fLIxtkSpmeXV/mgZ9GC5oUNyhWpTN9ObrM/ovcVVG', 'farmer', '8605861037', 'wadi'),
-(3, 'rohan khot', '$2y$10$asKDlHAE/L8f/eXIEPN6L.2LzNRva3EBj2FU4NvM7B7W9hWvjZ/Be', 'buyer', '9146067347', 'kolhapur'),
-(4, 'ram', '$2y$10$pQ0FEmGUmnW47IH4E4eNVOd96VcPXW1nLNdZ83EWL1MzpW.uBmbgu', 'farmer', '9158694577', 'kavatheguland');
+INSERT INTO `users` (`id`, `name`, `password`, `role`, `phone`, `location`, `tasil`) VALUES
+(1, 'shreyash kagale', '$2y$10$7WnL5itZYdK.NjfkgcngaezunsIZta7vseaAnvU13ZxNYDwLo6nA6', 'admin', '9021506657', 'kavatheguland', 'shirol'),
+(2, 'shivraj nimblakar', '$2y$10$8gLXTswNElc8fLIxtkSpmeXV/mgZ9GC5oUNyhWpTN9ObrM/ovcVVG', 'farmer', '8605861037', 'wadi', 'shirol'),
+(3, 'rohan khot', '$2y$10$asKDlHAE/L8f/eXIEPN6L.2LzNRva3EBj2FU4NvM7B7W9hWvjZ/Be', 'buyer', '9146067347', 'kolhapur', 'karvir'),
+(4, 'ram', '$2y$10$pQ0FEmGUmnW47IH4E4eNVOd96VcPXW1nLNdZ83EWL1MzpW.uBmbgu', 'farmer', '9158694577', 'kavatheguland', 'shirol'),
+(5, 'buyer', '$2y$10$DaOcWMpxnc4plsQvXSpQMuRQhAo0nvauk4xGM8rlQDAaIpMPWlx2m', 'buyer', '7057906060', 'shedshal', 'shirol');
 
 --
 -- Indexes for dumped tables
@@ -140,7 +142,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
