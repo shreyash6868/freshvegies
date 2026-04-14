@@ -11,9 +11,6 @@ $user_id   = $_SESSION['user_id'];
 $user_role = $_SESSION['role'];
 $user_name = $_SESSION['user_name'];
 
-/* ===============================
-   GET USER TASIL
-================================ */
 $stmt_user = $conn->prepare("SELECT tasil FROM users WHERE id = ?");
 $stmt_user->bind_param("i", $user_id);
 $stmt_user->execute();
@@ -22,21 +19,40 @@ $user_data = $result_user->fetch_assoc();
 $user_tasil = $user_data['tasil'] ?? '';
 $stmt_user->close();
 
-/* ===============================
-   FETCH PRODUCTS
-================================ */
+$search_tasil = trim($_GET['search_tasil'] ?? '');
+
 if ($user_role == 'buyer') {
 
-    $stmt = $conn->prepare("
-        SELECT p.*, 
-               u.name AS farmer_name, 
-               u.phone AS farmer_phone, 
-               u.location AS farmer_location
-        FROM products p 
-        JOIN users u ON p.farmer_id = u.id
-        WHERE u.tasil = ?
-    ");
-    $stmt->bind_param("s", $user_tasil);
+    if (!empty($search_tasil)) {
+        $stmt = $conn->prepare("
+            SELECT p.*, 
+                   u.name AS farmer_name, 
+                   u.phone AS farmer_phone, 
+                   u.location AS farmer_location,
+                   u.district AS farmer_district,
+                   u.state AS farmer_state,
+                   u.country AS farmer_country
+            FROM products p 
+            JOIN users u ON p.farmer_id = u.id
+            WHERE u.location LIKE ? OR u.district LIKE ? OR u.state LIKE ? OR u.country LIKE ? OR u.tasil LIKE ?
+        ");
+        $search_param = '%' . $search_tasil . '%';
+        $stmt->bind_param("sssss", $search_param, $search_param, $search_param, $search_param, $search_param);
+    } else {
+        $stmt = $conn->prepare("
+            SELECT p.*, 
+                   u.name AS farmer_name, 
+                   u.phone AS farmer_phone, 
+                   u.location AS farmer_location,
+                   u.district AS farmer_district,
+                   u.state AS farmer_state,
+                   u.country AS farmer_country
+            FROM products p 
+            JOIN users u ON p.farmer_id = u.id
+            WHERE u.tasil = ?
+        ");
+        $stmt->bind_param("s", $user_tasil);
+    }
 
 } elseif ($user_role == 'admin') {
 
@@ -79,7 +95,10 @@ $conn->close();
 <body>
 
 <nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand">freshvegies</span>
+    <a class="navbar-brand d-flex align-items-center" href="index.php">
+        <img src="uploads/freshvegies logo.jpg" alt="Freshvegies logo" class="page-logo navbar-logo mr-2">
+        freshvegies
+    </a>
     <div>
         <span class="mr-3">Welcome, <?php echo htmlspecialchars($user_name); ?>!</span>
         <a href="login.php" class="btn btn-outline-danger btn-sm">Logout</a>
@@ -88,6 +107,19 @@ $conn->close();
 
 <div class="container mt-5">
     <h2>Available Products</h2>
+
+    <?php if ($_SESSION['role'] === 'buyer'): ?>
+        <form method="GET" class="form-inline mb-4">
+            <div class="form-group mr-2">
+                
+                <input type="text" class="form-control" id="search_tasil" name="search_tasil"
+                       placeholder="Search locations"
+                       value="<?php echo htmlspecialchars($search_tasil); ?>">
+            </div>
+            <button type="submit" class="btn btn-secondary">Search</button>
+            <a href="index.php" class="btn btn-link">Show my tasil</a>
+        </form>
+    <?php endif; ?>
 
     <?php if (empty($products)): ?>
         <p>No products available at the moment.</p>
@@ -114,6 +146,9 @@ $conn->close();
                                 data-name="<?php echo htmlspecialchars($product['farmer_name']); ?>"
                                 data-phone="<?php echo htmlspecialchars($product['farmer_phone']); ?>"
                                 data-location="<?php echo htmlspecialchars($product['farmer_location']); ?>"
+                                data-district="<?php echo htmlspecialchars($product['farmer_district']); ?>"
+                                data-state="<?php echo htmlspecialchars($product['farmer_state']); ?>"
+                                data-country="<?php echo htmlspecialchars($product['farmer_country']); ?>"
                                 data-toggle="modal"
                                 data-target="#contactModal">
                                 Contact Farmer
@@ -142,6 +177,9 @@ $conn->close();
             <button class="btn btn-sm btn-outline-secondary ml-2" onclick="copyPhone()">Copy</button>
         </p>
         <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+        <p><strong>District:</strong> <span id="modalDistrict"></span></p>
+        <p><strong>State:</strong> <span id="modalState"></span></p>
+        <p><strong>Country:</strong> <span id="modalCountry"></span></p>
         <small id="copyMessage" class="text-success" style="display:none;">Copied!</small>
       </div>
     </div>
@@ -159,6 +197,9 @@ document.querySelectorAll('.contact-btn').forEach(button => {
         document.getElementById('modalName').textContent = this.dataset.name;
         document.getElementById('modalPhone').textContent = this.dataset.phone;
         document.getElementById('modalLocation').textContent = this.dataset.location;
+        document.getElementById('modalDistrict').textContent = this.dataset.district;
+        document.getElementById('modalState').textContent = this.dataset.state;
+        document.getElementById('modalCountry').textContent = this.dataset.country;
         currentPhone = this.dataset.phone;
         document.getElementById('copyMessage').style.display = "none";
     });

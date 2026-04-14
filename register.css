@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #78f178;
+    background: linear-gradient(135deg, #F1F8E9, #DCEDC8); /* light green gradient */
 }
 
 /* Wrapper */
@@ -58,7 +58,7 @@ select.form-control {
 .btn-primary {
     width: 100%;
     margin-top: 15px;
-    background: #2e7d32;
+    background: #4CAF50; /* green */
     border: none;
     padding: 10px;
     border-radius: 8px;
@@ -66,12 +66,26 @@ select.form-control {
 }
 
 .btn-primary:hover {
-    background: #1b5e20;
+    background: #2E7D32;
 }
 
 /* Error Box */
 .alert {
     border-radius: 8px;
+}
+
+.page-logo {
+    display: block;
+    height: 80px;
+    width: auto;
+    margin: 0 0 12px 0;
+}
+
+.page-logo-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
 }
 
 /* Bottom text */

@@ -18,9 +18,7 @@ if (!is_dir($upload_dir)) {
     mkdir($upload_dir, 0755, true);
 }
 
-/* ===========================
-   DELETE PRODUCT (Farmer) - NEW
-=========================== */
+
 if ($user_role == 'farmer' && isset($_POST['delete_product'])) {
     $product_id = intval($_POST['product_id']);
     
@@ -31,9 +29,6 @@ if ($user_role == 'farmer' && isset($_POST['delete_product'])) {
     $stmt_delete->close();
 }
 
-/* ===========================
-   UPDATE QUANTITY (Farmer)
-=========================== */
 if ($user_role == 'farmer' && isset($_POST['update_quantity'])) {
     $product_id = intval($_POST['product_id']);
     $new_quantity = floatval($_POST['new_quantity']);
@@ -46,9 +41,7 @@ if ($user_role == 'farmer' && isset($_POST['update_quantity'])) {
     }
 }
 
-/* ===========================
-   GET USER TASIL
-=========================== */
+
 $stmt_user = $conn->prepare("SELECT tasil FROM users WHERE id = ?");
 $stmt_user->bind_param("i", $user_id);
 $stmt_user->execute();
@@ -57,9 +50,6 @@ $user_data = $result_user->fetch_assoc();
 $user_tasil = $user_data['tasil'] ?? '';
 $stmt_user->close();
 
-/* ===========================
-   ADD PRODUCT (Farmer)
-=========================== */
 if ($user_role == 'farmer' && isset($_POST['name'])) {
     $name = trim($_POST['name']);
     $description = trim($_POST['description']);
@@ -93,9 +83,7 @@ if ($user_role == 'farmer' && isset($_POST['name'])) {
     }
 }
 
-/* ===========================
-   FETCH PRODUCTS
-=========================== */
+
 if ($user_role == 'farmer') {
     $stmt = $conn->prepare("SELECT * FROM products WHERE farmer_id = ?");
     $stmt->bind_param("i", $user_id);
@@ -121,11 +109,113 @@ $conn->close();
 <head>
     <title>Products - freshvegies</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #2E7D32, #43A047) !important;
+            padding: 12px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+            color: #ffffff !important;
+            letter-spacing: 1px;
+        }
+        .navbar span {
+            color: #e8f5e9 !important;
+            font-weight: 500;
+        }
+        .navbar .btn {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+        .navbar .btn:hover {
+            background-color: #ffffff;
+            color: #2e7d32;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        h3 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .card img {
+            border-bottom: 1px solid #eee;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .card-body h5 {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        .card-body p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .card-body strong {
+            color: #000;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2E7D32;
+        }
+        .btn-warning {
+            background-color: #FF9800;
+            border: none;
+        }
+        .btn-warning:hover {
+            background-color: #F57C00;
+        }
+        .btn-outline-danger {
+            border-color: #F44336;
+            color: #F44336;
+        }
+        .btn-outline-danger:hover {
+            background-color: #F44336;
+            color: #ffffff;
+        }
+        .page-logo {
+            height: 80px;
+            width: auto;
+        }
+    </style>
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-light shadow-sm">
-    <span class="navbar-brand mb-0 h4">freshvegies</span>
+    <a class="navbar-brand d-flex align-items-center" href="products.php">
+        <img src="uploads/freshvegies logo.jpg" alt="Freshvegies logo" class="page-logo mr-2">
+        freshvegies
+    </a>
     <div class="ml-auto">
         <span class="mr-3">Welcome, <strong><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong></span>
         <a href="login.php" class="btn btn-danger btn-sm">Logout</a>

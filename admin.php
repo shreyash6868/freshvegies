@@ -12,9 +12,7 @@ $success = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    /* =========================
-       ADD USER
-    ========================== */
+
     if (isset($_POST['add_user'])) {
 
         $name = trim($_POST['name']);
@@ -23,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $role = $_POST['role'];
         $location = trim($_POST['location']);
         $tasil = trim($_POST['tasil']);
+        $district = trim($_POST['district']);
+        $state = trim($_POST['state']);
+        $country = trim($_POST['country']);
 
         if (empty($name)) $errors[] = "Name is required.";
         if (empty($phone) || !preg_match('/^\+?[0-9]{10,15}$/', $phone))
@@ -33,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors[] = "Invalid role selected.";
         if (empty($location)) $errors[] = "Location is required.";
         if (empty($tasil)) $errors[] = "Tasil is required.";
+        if (empty($district)) $errors[] = "District is required.";
+        if (empty($state)) $errors[] = "State is required.";
+        if (empty($country)) $errors[] = "Country is required.";
 
         if (empty($errors)) {
 
@@ -47,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                $stmt = $conn->prepare("INSERT INTO users (name, phone, password, role, location, tasil) VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssss", $name, $phone, $hashed_password, $role, $location, $tasil);
+                $stmt = $conn->prepare("INSERT INTO users (name, phone, password, role, location, tasil, district, state, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssssssss", $name, $phone, $hashed_password, $role, $location, $tasil, $district, $state, $country);
 
                 if ($stmt->execute()) {
                     $success = "User added successfully.";
@@ -60,9 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    /* =========================
-       DELETE USER
-    ========================== */
+    
     if (isset($_POST['delete_user'])) {
 
         $user_id_to_delete = intval($_POST['user_id']);
@@ -83,20 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-/* =========================
-   FETCH USERS
-========================= */
+
 $search = $_GET['search'] ?? '';
 
 if (!empty($search)) {
 
-    $sql = "SELECT id, name, phone, role, location, tasil FROM users 
-            WHERE phone LIKE ? OR location LIKE ? OR tasil LIKE ?
+    $sql = "SELECT id, name, phone, role, location, tasil, district, state, country FROM users 
+            WHERE phone LIKE ? OR location LIKE ? OR tasil LIKE ? OR district LIKE ? OR state LIKE ? OR country LIKE ?
             ORDER BY role";
 
     $stmt = $conn->prepare($sql);
     $search_param = '%' . $search . '%';
-    $stmt->bind_param("sss", $search_param, $search_param, $search_param);
+    $stmt->bind_param("ssssss", $search_param, $search_param, $search_param, $search_param, $search_param, $search_param);
     $stmt->execute();
     $result = $stmt->get_result();
     $users = $result->fetch_all(MYSQLI_ASSOC);
@@ -104,7 +104,7 @@ if (!empty($search)) {
 
 } else {
 
-    $result = $conn->query("SELECT id, name, phone, role, location, tasil FROM users ORDER BY role");
+    $result = $conn->query("SELECT id, name, phone, role, location, tasil, district, state, country FROM users ORDER BY role");
     $users = $result->fetch_all(MYSQLI_ASSOC);
 }
 
@@ -123,7 +123,10 @@ $conn->close();
 
     <!-- HEADER -->
     <div class="admin-header p-3 mb-4">
-        <h2>Admin Dashboard</h2>
+        <div class="d-flex align-items-center mb-3">
+            <img src="uploads/freshvegies logo.jpg" alt="Freshvegies logo" class="page-logo">
+            <h2 class="mb-0">Admin Dashboard</h2>
+        </div>
         <p>
             Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?> |
             <a href="login.php">Logout</a>
@@ -191,6 +194,21 @@ $conn->close();
                     <input type="text" class="form-control" name="tasil" required>
                 </div>
 
+                <div class="form-group">
+                    <label>District</label>
+                    <input type="text" class="form-control" name="district" required>
+                </div>
+
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control" name="state" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" class="form-control" name="country" value="India" required>
+                </div>
+
                 <button type="submit" name="add_user" class="btn btn-success">
                     Save User
                 </button>
@@ -230,6 +248,9 @@ $conn->close();
                     <th>Role</th>
                     <th>Location</th>
                     <th>Tasil</th>
+                    <th>District</th>
+                    <th>State</th>
+                    <th>Country</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -243,6 +264,9 @@ $conn->close();
                         <td><?php echo htmlspecialchars($user['role']); ?></td>
                         <td><?php echo htmlspecialchars($user['location']); ?></td>
                         <td><?php echo htmlspecialchars($user['tasil']); ?></td>
+                        <td><?php echo htmlspecialchars($user['district']); ?></td>
+                        <td><?php echo htmlspecialchars($user['state']); ?></td>
+                        <td><?php echo htmlspecialchars($user['country']); ?></td>
                         <td>
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">

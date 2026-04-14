@@ -75,6 +75,7 @@ body {
 
 <div class="login-wrapper">
     <div class="login-card">
+        <img src="uploads/freshvegies logo.jpg" alt="Freshvegies logo" class="page-logo">
         <h2>Login</h2> 
 
         <?php 

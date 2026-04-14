@@ -13,7 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirm_password = $_POST['confirm_password'];
     $role = $_POST['role'];
     $location = trim($_POST['location']);
-    $tasil = trim($_POST['tasil']);   // ✅ NEW
+    $tasil = trim($_POST['tasil']);
+    $district = trim($_POST['district']);
+    $state = trim($_POST['state']);
+    $country = trim($_POST['country']);
 
     // Validation
     if (empty($name)) $errors[] = "Name is required.";
@@ -28,7 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($location)) 
         $errors[] = "Location is required.";
     if (empty($tasil)) 
-        $errors[] = "Tasil is required.";   // ✅ NEW VALIDATION
+        $errors[] = "Tasil is required.";
+    if (empty($district)) 
+        $errors[] = "District is required.";
+    if (empty($state)) 
+        $errors[] = "State is required.";
+    if (empty($country)) 
+        $errors[] = "Country is required.";
 
     if (empty($errors)) {
 
@@ -45,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // ✅ INSERT WITH TASIL
-            $stmt = $conn->prepare("INSERT INTO users (name, phone, password, role, location, tasil) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $name, $phone, $hashed_password, $role, $location, $tasil);
+            $stmt = $conn->prepare("INSERT INTO users (name, phone, password, role, location, tasil, district, state, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssss", $name, $phone, $hashed_password, $role, $location, $tasil, $district, $state, $country);
 
             if ($stmt->execute()) {
                 $success = true;
@@ -72,6 +81,7 @@ $conn->close();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <img src="uploads/freshvegies logo.jpg" alt="Freshvegies logo" class="page-logo page-logo-top">
 
 <div class="register-wrapper">
     <div class="register-card">
@@ -126,6 +136,21 @@ $conn->close();
             <div class="form-group">
                 <label>Tasil</label>
                 <input type="text" class="form-control" name="tasil" required>
+            </div>
+
+            <div class="form-group">
+                <label>District</label>
+                <input type="text" class="form-control" name="district" required>
+            </div>
+
+            <div class="form-group">
+                <label>State</label>
+                <input type="text" class="form-control" name="state" required>
+            </div>
+
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" class="form-control" name="country" value="India" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Register</button>

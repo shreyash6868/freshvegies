@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$user = 'root'; // Change to your MySQL user
-$pass = ''; // Change to your password
+$user = 'root'; 
+$pass = ''; 
 $db = 'farmer_market';
 
 $conn = new mysqli($host, $user, $pass, $db);

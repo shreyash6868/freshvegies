@@ -1,17 +1,12 @@
-/* =========================
-   GENERAL PAGE
-========================= */
+
 body {
-    background: linear-gradient(135deg, #a8e063, #56ab2f);
+    background: linear-gradient(135deg, #4CAF50, #8BC34A); /* green gradient */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
 }
 
-/* =========================
-   NAVBAR (FIXED + STYLED)
-========================= */
 .navbar {
-    background: linear-gradient(90deg, #1b5e20, #43a047) !important;
+    background: linear-gradient(90deg, #2E7D32, #43A047) !important; /* dark green */
     padding: 12px 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
@@ -47,9 +42,6 @@ body {
     color: #2e7d32;
 }
 
-/* =========================
-   CONTAINER
-========================= */
 .container {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 25px;
@@ -57,18 +49,12 @@ body {
     margin-top: 30px;
 }
 
-/* =========================
-   TITLE
-========================= */
 h2 {
     font-weight: 600;
     margin-bottom: 20px;
     color: #2e7d32;
 }
 
-/* =========================
-   PRODUCT CARDS
-========================= */
 .card {
     border: none;
     border-radius: 12px;
@@ -111,11 +97,8 @@ h2 {
     color: #000;
 }
 
-/* =========================
-   BUTTON
-========================= */
 .btn-primary {
-    background-color: #43a047;
+    background-color: #4CAF50; /* green */
     border: none;
     width: 100%;
     border-radius: 8px;
@@ -123,12 +106,9 @@ h2 {
 }
 
 .btn-primary:hover {
-    background-color: #2e7d32;
+    background-color: #2E7D32;
 }
 
-/* =========================
-   MODAL
-========================= */
 .modal-content {
     border-radius: 10px;
 }
@@ -137,6 +117,17 @@ h2 {
     background-color: #2e7d32;
     color: #fff;
     border-bottom: none;
+}
+
+.page-logo {
+    display: inline-block;
+    height: 56px;
+    width: auto;
+    margin: 0;
+}
+
+.navbar-logo {
+    height: 80px;
 }
 
 .modal-title {
@@ -153,9 +144,6 @@ h2 {
     padding: 2px 8px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 @media (max-width: 768px) {
     .card {
         margin-bottom: 20px;

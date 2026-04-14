@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    background: linear-gradient(to bottom, #2e7d32, #a5d6a7); /* dark green → light green */
+    background: linear-gradient(to bottom, #E8F5E8, #C8E6C9); /* light green gradient */
 }
 
 .login-wrapper {
@@ -51,6 +51,23 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
+.page-logo {
+    display: block;
+    height: 80px;
+    width: auto;
+    margin: 0 0 12px 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.page-logo-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
 /* Inputs */
 .form-control {
     border-radius: 10px;
@@ -59,13 +76,13 @@ body {
 
 /* Button */
 .btn-primary {
-    background-color: #388e3c; /* green button */
+    background-color: #4CAF50; /* green */
     border: none;
     border-radius: 10px;
 }
 
 .btn-primary:hover {
-    background-color: #2e7d32;
+    background-color: #2E7D32;
 }
 
 /* Register text */

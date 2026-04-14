@@ -83,19 +83,22 @@ CREATE TABLE `users` (
   `role` enum('farmer','buyer','admin') DEFAULT 'buyer',
   `phone` varchar(20) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
-  `tasil` varchar(100) NOT NULL
+  `tasil` varchar(100) NOT NULL,
+  `district` varchar(100) DEFAULT NULL,
+  `state` varchar(100) DEFAULT NULL,
+  `country` varchar(100) DEFAULT 'India'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `role`, `phone`, `location`, `tasil`) VALUES
-(1, 'shreyash kagale', '$2y$10$7WnL5itZYdK.NjfkgcngaezunsIZta7vseaAnvU13ZxNYDwLo6nA6', 'admin', '9021506657', 'kavatheguland', 'shirol'),
-(2, 'shivraj nimblakar', '$2y$10$8gLXTswNElc8fLIxtkSpmeXV/mgZ9GC5oUNyhWpTN9ObrM/ovcVVG', 'farmer', '8605861037', 'wadi', 'shirol'),
-(3, 'rohan khot', '$2y$10$asKDlHAE/L8f/eXIEPN6L.2LzNRva3EBj2FU4NvM7B7W9hWvjZ/Be', 'buyer', '9146067347', 'kolhapur', 'karvir'),
-(4, 'ram', '$2y$10$pQ0FEmGUmnW47IH4E4eNVOd96VcPXW1nLNdZ83EWL1MzpW.uBmbgu', 'farmer', '9158694577', 'kavatheguland', 'shirol'),
-(5, 'buyer', '$2y$10$DaOcWMpxnc4plsQvXSpQMuRQhAo0nvauk4xGM8rlQDAaIpMPWlx2m', 'buyer', '7057906060', 'shedshal', 'shirol');
+INSERT INTO `users` (`id`, `name`, `password`, `role`, `phone`, `location`, `tasil`, `district`, `state`, `country`) VALUES
+(1, 'shreyash kagale', '$2y$10$7WnL5itZYdK.NjfkgcngaezunsIZta7vseaAnvU13ZxNYDwLo6nA6', 'admin', '9021506657', 'kavatheguland', 'shirol', 'Shirol', 'Maharashtra', 'India'),
+(2, 'shivraj nimblakar', '$2y$10$8gLXTswNElc8fLIxtkSpmeXV/mgZ9GC5oUNyhWpTN9ObrM/ovcVVG', 'farmer', '8605861037', 'wadi', 'shirol', 'Shirol', 'Maharashtra', 'India'),
+(3, 'rohan khot', '$2y$10$asKDlHAE/L8f/eXIEPN6L.2LzNRva3EBj2FU4NvM7B7W9hWvjZ/Be', 'buyer', '9146067347', 'kolhapur', 'karvir', 'Karvir', 'Maharashtra', 'India'),
+(4, 'ram', '$2y$10$pQ0FEmGUmnW47IH4E4eNVOd96VcPXW1nLNdZ83EWL1MzpW.uBmbgu', 'farmer', '9158694577', 'kavatheguland', 'shirol', 'Shirol', 'Maharashtra', 'India'),
+(5, 'buyer', '$2y$10$DaOcWMpxnc4plsQvXSpQMuRQhAo0nvauk4xGM8rlQDAaIpMPWlx2m', 'buyer', '7057906060', 'shedshal', 'shirol', 'Shirol', 'Maharashtra', 'India');
 
 --
 -- Indexes for dumped tables

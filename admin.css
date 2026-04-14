@@ -1,30 +1,30 @@
 /* General Page Styling */
 body {
-    background: linear-gradient(135deg, #a8e063, #56ab2f);
+    background: linear-gradient(135deg, #8D6E63, #A1887F); /* earthy browns */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
 }
 
 /* Navbar */
 .navbar {
-    background-color: #2e7d32 !important;
+    background-color: #5D4037 !important; /* dark brown */
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .navbar-brand {
     font-weight: bold;
     font-size: 22px;
-    color: #fff !important;
+    color: #FFF8E1 !important; /* light cream */
 }
 
 .navbar span,
 .navbar a {
-    color: #fff !important;
+    color: #FFF8E1 !important;
 }
 
 /* Container */
 .container {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 245, 230, 0.95); /* light cream */
     padding: 25px;
     border-radius: 12px;
     margin-top: 30px;
@@ -34,7 +34,7 @@ body {
 h2 {
     font-weight: 600;
     margin-bottom: 20px;
-    color: #2e7d32;
+    color: #5D4037; /* dark brown */
 }
 
 /* Card Styling */
@@ -44,7 +44,7 @@ h2 {
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background-color: #ffffff;
+    background-color: #FFF8E1; /* light cream */
 }
 
 /* Hover Effect */
@@ -66,24 +66,24 @@ h2 {
 /* Product Name */
 .card-body h5 {
     font-weight: 600;
-    color: #2e7d32;
+    color: #4E342E; /* dark brown */
 }
 
 /* Text Styling */
 .card-body p {
     font-size: 14px;
-    color: #555;
+    color: #5D4037;
     margin-bottom: 8px;
 }
 
 /* Price Highlight */
 .card-body strong {
-    color: #000;
+    color: #2E7D32; /* green */
 }
 
 /* Button Styling */
 .btn-primary {
-    background-color: #43a047;
+    background-color: #8D6E63; /* brown */
     border: none;
     width: 100%;
     border-radius: 8px;
@@ -91,7 +91,7 @@ h2 {
 }
 
 .btn-primary:hover {
-    background-color: #2e7d32;
+    background-color: #5D4037; /* darker brown */
 }
 
 /* Modal Styling */
@@ -100,7 +100,7 @@ h2 {
 }
 
 .modal-header {
-    background-color: #2e7d32;
+    background-color: #8D6E63; /* brown */
     color: #fff;
     border-bottom: none;
 }
@@ -117,6 +117,13 @@ h2 {
 .btn-outline-secondary {
     font-size: 12px;
     padding: 2px 8px;
+}
+
+.page-logo {
+    display: inline-block;
+    height: 56px;
+    width: auto;
+    margin: 0;
 }
 
 /* Responsive Fix */
