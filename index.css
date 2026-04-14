@@ -1,0 +1,163 @@
+/* =========================
+   GENERAL PAGE
+========================= */
+body {
+    background: linear-gradient(135deg, #a8e063, #56ab2f);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* =========================
+   NAVBAR (FIXED + STYLED)
+========================= */
+.navbar {
+    background: linear-gradient(90deg, #1b5e20, #43a047) !important;
+    padding: 12px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff !important;
+    letter-spacing: 1px;
+}
+
+.navbar span {
+    color: #e8f5e9 !important;
+    font-weight: 500;
+}
+
+/* Right side spacing */
+.navbar div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Logout button */
+.navbar .btn-outline-danger {
+    border-color: #ffffff;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.navbar .btn-outline-danger:hover {
+    background-color: #ffffff;
+    color: #2e7d32;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+/* =========================
+   TITLE
+========================= */
+h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2e7d32;
+}
+
+/* =========================
+   PRODUCT CARDS
+========================= */
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Image */
+.card img {
+    border-bottom: 1px solid #eee;
+}
+
+/* Card body */
+.card-body {
+    padding: 15px;
+}
+
+/* Product name */
+.card-body h5 {
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+/* Text */
+.card-body p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Price */
+.card-body strong {
+    color: #000;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn-primary {
+    background-color: #43a047;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2e7d32;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #2e7d32;
+    color: #fff;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body p {
+    margin-bottom: 10px;
+}
+
+/* Copy button */
+.btn-outline-secondary {
+    font-size: 12px;
+    padding: 2px 8px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}

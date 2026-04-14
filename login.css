@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to bottom, #2e7d32, #a5d6a7); /* dark green → light green */
+}
+
+.login-wrapper {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.banner {
+    margin-bottom: 30px;
+}
+
+.ribbon {
+    display: inline-block;
+    background: #66bb6a; /* green */
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.title .orange {
+    color: #1b5e20; /* dark green instead of orange */
+    background: #e8f5e9;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.title .black {
+    color: #2e7d32;
+    background: #c8e6c9;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.login-card {
+    width: 350px;
+    margin: auto;
+    background: #f1f8e9; /* soft green tint */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #81c784;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #388e3c; /* green button */
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #2e7d32;
+}
+
+/* Register text */
+.register-text {
+    margin-top: 15px;
+    color: #2e7d32;
+}

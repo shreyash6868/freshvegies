@@ -1,0 +1,102 @@
+/* Body Styling */
+body {
+    background: #f5f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #28a745, #20c997);
+    color: white;
+}
+
+.navbar .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.navbar span, .navbar a {
+    color: white !important;
+}
+
+/* Heading */
+h2 {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Card Design */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Product Image */
+.card img {
+    border-bottom: 1px solid #eee;
+}
+
+/* Card Content */
+.card-body h5 {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Price Highlight */
+.card-body strong {
+    color: #000;
+}
+
+/* Button Styling */
+.btn-primary {
+    background: #28a745;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #218838;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    background: #28a745;
+    color: white;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+/* Copy Button */
+.btn-outline-secondary {
+    border-radius: 15px;
+}
+
+/* Empty Message */
+.container p {
+    font-size: 16px;
+    color: #888;
+}

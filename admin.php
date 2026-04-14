@@ -110,136 +110,157 @@ if (!empty($search)) {
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Admin Dashboard - Farmer Market</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div class="container mt-5">
-    <h2>Admin Dashboard</h2>
-    <p>
-        Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?> |
-        <a href="login.php">Logout</a>
-    </p>
+<div class="container mt-4">
 
-    <!-- ADD USER BUTTON -->
-    <h3>Add New User</h3>
-    <button class="btn btn-primary mb-3" onclick="toggleForm()">
-        Add User
-    </button>
+    <!-- HEADER -->
+    <div class="admin-header p-3 mb-4">
+        <h2>Admin Dashboard</h2>
+        <p>
+            Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?> |
+            <a href="login.php">Logout</a>
+        </p>
+    </div>
 
-    <!-- ADD USER FORM (HIDDEN) -->
-    <div id="addUserForm" style="display:none;">
+    <!-- ADD USER -->
+    <div class="card-box p-3 mb-4">
 
-        <?php if (!empty($errors)): ?>
-            <div class="alert alert-danger">
-                <?php foreach ($errors as $error): ?>
-                    <div><?php echo htmlspecialchars($error); ?></div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <h3>Add New User</h3>
 
-        <?php if ($success): ?>
-            <div class="alert alert-success">
-                <?php echo htmlspecialchars($success); ?>
-            </div>
-        <?php endif; ?>
+        <button class="btn btn-primary mb-3" onclick="toggleForm()">Add User</button>
 
-        <form method="POST">
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="name" required>
-            </div>
+        <div id="addUserForm" style="display:none;">
 
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" name="phone" required>
-            </div>
+            <!-- ERROR -->
+            <?php if (!empty($errors)) { ?>
+                <div class="alert alert-danger">
+                    <?php foreach ($errors as $error) { ?>
+                        <div><?php echo htmlspecialchars($error); ?></div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password" required>
-            </div>
+            <!-- SUCCESS -->
+            <?php if (!empty($success)) { ?>
+                <div class="alert alert-success">
+                    <?php echo htmlspecialchars($success); ?>
+                </div>
+            <?php } ?>
 
-            <div class="form-group">
-                <label>Role</label>
-                <select class="form-control" name="role" required>
-                    <option value="buyer">Buyer</option>
-                    <option value="farmer">Farmer</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
+            <form method="POST">
 
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" class="form-control" name="location" required>
-            </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
 
-            <div class="form-group">
-                <label>Tasil</label>
-                <input type="text" class="form-control" name="tasil" required>
-            </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" name="phone" required>
+                </div>
 
-            <button type="submit" name="add_user" class="btn btn-success">
-                Save User
-            </button>
-        </form>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
 
-        <hr>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select class="form-control" name="role" required>
+                        <option value="buyer">Buyer</option>
+                        <option value="farmer">Farmer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tasil</label>
+                    <input type="text" class="form-control" name="tasil" required>
+                </div>
+
+                <button type="submit" name="add_user" class="btn btn-success">
+                    Save User
+                </button>
+
+            </form>
+
+        </div>
     </div>
 
     <!-- SEARCH -->
-    <h3>Search Users</h3>
-    <form method="GET" class="form-inline mb-3">
-        <input type="text" name="search" class="form-control mr-2"
-               placeholder="Search by phone, location or tasil"
-               value="<?php echo htmlspecialchars($search); ?>">
-        <button type="submit" class="btn btn-secondary">Search</button>
-        <a href="admin.php" class="btn btn-link">Clear</a>
-    </form>
+    <div class="card-box p-3 mb-4">
 
-    <!-- USER TABLE -->
-    <h3>Existing Users</h3>
+        <h3>Search Users</h3>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Location</th>
-                <th>Tasil</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
+        <form method="GET" class="form-inline mb-3">
+            <input type="text" name="search" class="form-control mr-2"
+                   placeholder="Search..."
+                   value="<?php echo isset($search) ? htmlspecialchars($search) : ''; ?>">
+
+            <button type="submit" class="btn btn-secondary">Search</button>
+            <a href="admin.php" class="btn btn-link">Clear</a>
+        </form>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="card-box p-3">
+
+        <h3>Existing Users</h3>
+
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><?php echo $user['id']; ?></td>
-                    <td><?php echo htmlspecialchars($user['name']); ?></td>
-                    <td><?php echo htmlspecialchars($user['phone']); ?></td>
-                    <td><?php echo htmlspecialchars($user['role']); ?></td>
-                    <td><?php echo htmlspecialchars($user['location']); ?></td>
-                    <td><?php echo htmlspecialchars($user['tasil']); ?></td>
-                    <td>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                            <button type="submit" name="delete_user"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Delete this user?')">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Location</th>
+                    <th>Tasil</th>
+                    <th>Action</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+
+                <?php foreach ($users as $user) { ?>
+                    <tr>
+                        <td><?php echo $user['id']; ?></td>
+                        <td><?php echo htmlspecialchars($user['name']); ?></td>
+                        <td><?php echo htmlspecialchars($user['phone']); ?></td>
+                        <td><?php echo htmlspecialchars($user['role']); ?></td>
+                        <td><?php echo htmlspecialchars($user['location']); ?></td>
+                        <td><?php echo htmlspecialchars($user['tasil']); ?></td>
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                <button type="submit" name="delete_user"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this user?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php } ?>
+
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
 
 <script>
